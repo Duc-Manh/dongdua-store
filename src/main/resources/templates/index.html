@@ -3,17 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title th:text="${title}">Quán nước đong đưa</title>
-    <!-- Google Fonts -->
+    
+    <title th:text="${title}">Tiệm nước đong đưa</title>
+    <meta name="description" content="Tiệm nước đong đưa tại Đà Nẵng - Không gian thư giãn với các loại cà phê, trà sữa và thức uống giải nhiệt tuyệt vời." />
+    <meta name="keywords" content="đong đưa, cafe đà nẵng, tiệm nước đà nẵng, trà sữa nguyễn lương bằng, đong đưa cafe, học bài, làm việc, coking, working-space" />
+    <meta name="author" content="vidom" />
+    <meta name="robots" content="index, follow" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" th:content="${#httpServletRequest.requestURL}" />
+    <meta property="og:title" th:text="${title}">Tiệm nước đong đưa</meta>
+    <meta property="og:description" content="Thưởng thức hương vị đậm đà cùng không gian cực chill tại đong đưa " />
+    <meta property="og:image" th:content="${#httpServletRequest.requestURL.toString().replace(#httpServletRequest.requestURI, '') + '/images/zalo.jpg'}" /> <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" th:content="${#httpServletRequest.requestURL}" />
+    <meta property="twitter:title" th:text="${title}">Tiệm nước đong đưa</meta>
+    <meta property="twitter:description" content="Thưởng thức hương vị đậm đà cùng không gian cực chill tại đong đưa Đà Nẵng." />
+
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap"
-      rel="stylesheet"
-    />
-    <!-- Tailwind CSS Output -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet" />
+    
     <link href="/css/output.css" rel="stylesheet" />
-  </head>
+</head>
   <body
     class="font-sans bg-coffee-50 text-coffee-900 antialiased selection:bg-coffee-200 selection:text-coffee-900"
   >
