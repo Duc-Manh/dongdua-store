@@ -11,6 +11,6 @@ WORKDIR /app
 # Copy file jar đã build thành công sang image chạy chính thức
 COPY --from=build /app/target/*.jar app.jar
 # Mở cổng 8081 (khớp với cấu hình port của anh nếu có)
-EXPOSE 8081
-# Lệnh khởi chạy ứng dụng
-ENTRYPOINT ["java", "-jar", "app.jar"]
+EXPOSE 8080
+# Lệnh khởi chạy ứng dụng, ép dùng biến PORT từ Render
+ENTRYPOINT ["java", "-Xmx512m", "-Dserver.port=${PORT:8080}", "-jar", "app.jar"]
