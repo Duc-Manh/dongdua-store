@@ -1,14 +1,14 @@
 {
   "name": "tiemnuocdongdua",
   "version": "1.0.0",
-  "description": "",
+  "description": "Website Tiệm nước Đong Đưa - Đà Nẵng",
   "main": "index.js",
   "scripts": {
-    "build:css": "tailwindcss -i ./src/main/resources/static/css/input.css -o ./src/main/resources/static/css/output.css",
-    "watch:css": "tailwindcss -i ./src/main/resources/static/css/input.css -o ./src/main/resources/static/css/output.css --watch"
+    "build:css": "npx tailwindcss -i ./src/main/resources/static/css/input.css -o ./src/main/resources/static/css/output.css",
+    "watch:css": "npx tailwindcss -i ./src/main/resources/static/css/input.css -o ./src/main/resources/static/css/output.css --watch"
   },
   "keywords": [],
-  "author": "",
+  "author": "Trần Đức Mạnh",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {

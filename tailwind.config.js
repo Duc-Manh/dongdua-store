@@ -4,23 +4,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'brand-brown': '#92400e',
+        'brand-brown': '#a95c31',
         coffee: {
-          50: '#fdf8f6',
-          100: '#f2e8e5',
-          200: '#eaddd7',
-          300: '#e0cec7',
-          400: '#d2bab0',
-          500: '#a38a80',
-          600: '#8c7369',
-          700: '#685149',
-          800: '#493933',
-          900: '#2b211d',
+          50: '#fdfaf7',
+          100: '#f7f0e8',
+          200: '#eedfce',
+          400: '#d9b99b',
+          500: '#c69976',
+          600: '#b47c59',
+          700: '#956248',
+          800: '#79503d',
+          900: '#644335',
         },
-      },
-      fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        serif: ['Merriweather', 'serif'],
       },
     },
   },
