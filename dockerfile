@@ -1,22 +1,16 @@
-# Bước 1: Build dự án bằng Maven
-FROM maven:3.8.5-openjdk-17 AS build
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
-
-# Copy toàn bộ thư mục store vào trong container
-COPY store/ .
-
-# Thực hiện build file JAR
+# Copy file cấu hình Maven và code vào container
+COPY . .
+# Chạy lệnh build đóng gói file JAR (bỏ qua chạy test để build nhanh hơn)
 RUN mvn clean package -DskipTests
 
-# Bước 2: Chạy ứng dụng bằng Java
-FROM openjdk:17-jdk-slim
+# Bước 2: Chạy ứng dụng
+FROM eclipse-temurin:17-jre-jammy
 WORKDIR /app
-
-# Copy file JAR đã build từ bước trước sang
+# Copy file jar đã build thành công sang image chạy chính thức
 COPY --from=build /app/target/*.jar app.jar
-
-# Mở cổng (thường là 8080 hoặc 8081 tùy cấu hình của anh)
+# Mở cổng 8081 (khớp với cấu hình port của anh nếu có)
 EXPOSE 8081
-
-# Lệnh khởi chạy
+# Lệnh khởi chạy ứng dụng
 ENTRYPOINT ["java", "-jar", "app.jar"]
