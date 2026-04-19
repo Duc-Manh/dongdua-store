@@ -113,6 +113,31 @@
         animation-delay: 1s;
         animation-duration: 4s;
       }
+      @media (max-width: 480px) {
+        .vietnam-flag-string {
+          top: 20px;
+          left: 90px; /* Căn chỉnh lại vị trí */
+          padding: 0 10px;
+        }
+
+        /* Ẩn các lá cờ từ thứ 6 trở đi để chỉ còn lại 5 lá */
+        .flag:nth-child(n + 6) {
+          display: none;
+        }
+
+        /* Giảm kích thước và khoảng cách */
+        .flag {
+          width: 30px; /* Giảm từ 45px */
+          height: 45px; /* Giảm từ 65px */
+          margin: 0 4px; /* Giảm khoảng cách giữa các cờ */
+        }
+
+        /* Điều chỉnh lại kích thước ngôi sao cho khớp với cờ nhỏ */
+        .flag::after {
+          font-size: 18px; /* Giảm từ 28px */
+          top: 42%; /* Căn chỉnh lại vị trí sao */
+        }
+      }
     </style>
   </head>
   <body
