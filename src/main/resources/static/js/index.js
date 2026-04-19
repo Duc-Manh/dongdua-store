@@ -72,29 +72,39 @@ const firebaseConfig = {
 };
 
 if (typeof firebase !== 'undefined') {
-  firebase.initializeApp(firebaseConfig);
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
   const database = firebase.database();
-  const todayStr = new Date().toISOString().split('T')[0];
+
+  // Lấy ngày hiện tại theo múi giờ Việt Nam (YYYY-MM-DD)
+  const now = new Date();
+  const todayStr = now.toLocaleDateString('en-CA'); // Trả về định dạng YYYY-MM-DD chính xác
+
   const totalRef = database.ref('visitors/total');
   const todayRef = database.ref('visitors/daily/' + todayStr);
 
-  if (!sessionStorage.getItem('visited')) {
-    totalRef.transaction((c) => (c || 0) + 1);
-    todayRef.transaction((c) => (c || 0) + 1);
-    sessionStorage.setItem('visited', 'true');
+  // Tăng số lượt truy cập (Chỉ tăng 1 lần mỗi phiên làm việc để tránh spam)
+  if (!sessionStorage.getItem('visited_dong_dua')) {
+    totalRef.transaction((current) => (current || 0) + 1);
+    todayRef.transaction((current) => (current || 0) + 1);
+    sessionStorage.setItem('visited_dong_dua', 'true');
   }
 
-  totalRef.on('value', (s) => {
+  // Lắng nghe và cập nhật số liệu "Tổng lượt xem"
+  totalRef.on('value', (snapshot) => {
+    const val = snapshot.val() || 0;
     const el = document.getElementById('total-visitors');
-    if (el) el.innerText = s.val() || 0;
+    if (el) el.innerText = val.toLocaleString(); // Thêm dấu phẩy phân cách hàng nghìn cho đẹp
   });
 
-  todayRef.on('value', (s) => {
+  // Lắng nghe và cập nhật số liệu "Hôm nay"
+  todayRef.on('value', (snapshot) => {
+    const val = snapshot.val() || 0;
     const el = document.getElementById('today-visitors');
-    if (el) el.innerText = s.val() || 0;
+    if (el) el.innerText = val.toLocaleString();
   });
 }
-
 // --- 4. Hệ thống Sidebar (Hover hiện - Click ngoài đóng) ---
 
 function openSidebar(id, direction) {
