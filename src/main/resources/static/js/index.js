@@ -1,4 +1,4 @@
-// 1. Cấu hình Slider cho Không gian quán
+// --- 1. Cấu hình Slider cho Không gian quán ---
 const currentIndices = {
   'img-tang-1': 1,
   'img-tang-2': 1,
@@ -8,29 +8,21 @@ function changeImage(elementId, prefix, direction, total) {
   const imgElement = document.getElementById(elementId);
   if (!imgElement) return;
 
-  // Tính toán chỉ số ảnh tiếp theo
   currentIndices[elementId] += direction;
+  if (currentIndices[elementId] > total) currentIndices[elementId] = 1;
+  else if (currentIndices[elementId] < 1) currentIndices[elementId] = total;
 
-  if (currentIndices[elementId] > total) {
-    currentIndices[elementId] = 1;
-  } else if (currentIndices[elementId] < 1) {
-    currentIndices[elementId] = total;
-  }
-
-  // Hiệu ứng chuyển cảnh mượt mà
   imgElement.style.opacity = '0.3';
-
   setTimeout(() => {
-    // Cập nhật đường dẫn ảnh mới
     imgElement.src = `/images/${prefix}${currentIndices[elementId]}.jpg`;
     imgElement.style.opacity = '1';
   }, 250);
 }
 
-// 2. Xử lý Hòm thư góp ý qua Google Sheets
+// --- 2. Xử lý Hòm thư góp ý ---
 document.addEventListener('DOMContentLoaded', () => {
   const scriptURL =
-    'https://script.google.com/macros/s/AKfycbw-V71fGkumO2QQsQucdulmv6C5KxN_kEQLKK4DM6Wg7ktGaXl08i-DBPff0KpSZS-1/exec'; // Thay URL thật của bạn vào đây
+    'https://script.google.com/macros/s/AKfycbw-V71fGkumO2QQsQucdulmv6C5KxN_kEQLKK4DM6Wg7ktGaXl08i-DBPff0KpSZS-1/exec';
   const feedbackForm = document.getElementById('feedbackForm');
 
   if (feedbackForm) {
@@ -39,41 +31,151 @@ document.addEventListener('DOMContentLoaded', () => {
 
     feedbackForm.addEventListener('submit', (e) => {
       e.preventDefault();
-
-      // Hiệu ứng nút bấm khi đang gửi
       const originalBtnText = submitBtn.innerHTML;
       submitBtn.innerText = 'Đang gửi...';
       submitBtn.disabled = true;
       submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
 
-      const formData = {
-        message: feedbackMessage.value,
-      };
-
-      // Gửi dữ liệu tới Google Sheets
       fetch(scriptURL, {
         method: 'POST',
-        mode: 'no-cors', // Chế độ bắt buộc cho Google Apps Script
+        mode: 'no-cors',
         cache: 'no-cache',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: feedbackMessage.value }),
       })
         .then(() => {
           alert('Cảm ơn bạn! Đong Đưa đã nhận được lời nhắn của bạn.');
           feedbackForm.reset();
         })
-        .catch((error) => {
-          console.error('Lỗi gửi feedback:', error);
-          alert('Rất tiếc, không gửi được góp ý. Bạn vui lòng thử lại sau nhé!');
-        })
+        .catch(() => alert('Rất tiếc, không gửi được góp ý. Bạn vui lòng thử lại sau nhé!'))
         .finally(() => {
-          // Khôi phục trạng thái nút bấm ban đầu
           submitBtn.innerHTML = originalBtnText;
           submitBtn.disabled = false;
           submitBtn.classList.remove('opacity-50', 'cursor-not-allowed');
         });
     });
   }
+
+  // Khởi tạo các sự kiện Sidebar sau khi DOM load
+  initSidebars();
 });
+
+// --- 3. Xử lý Firebase - Đếm lượt truy cập ---
+const firebaseConfig = {
+  apiKey: 'AIzaSyB5zh9Lv64cjukC8FBsYdiQ7s9anqLd6qU',
+  authDomain: 'dong-dua-916d5.firebaseapp.com',
+  databaseURL: 'https://dong-dua-916d5-default-rtdb.asia-southeast1.firebasedatabase.app',
+  projectId: 'dong-dua-916d5',
+  storageBucket: 'dong-dua-916d5.appspot.com',
+  messagingSenderId: '210843798211',
+  appId: '1:210843798211:web:513924e422c898ad04b076',
+};
+
+if (typeof firebase !== 'undefined') {
+  firebase.initializeApp(firebaseConfig);
+  const database = firebase.database();
+  const todayStr = new Date().toISOString().split('T')[0];
+  const totalRef = database.ref('visitors/total');
+  const todayRef = database.ref('visitors/daily/' + todayStr);
+
+  if (!sessionStorage.getItem('visited')) {
+    totalRef.transaction((c) => (c || 0) + 1);
+    todayRef.transaction((c) => (c || 0) + 1);
+    sessionStorage.setItem('visited', 'true');
+  }
+
+  totalRef.on('value', (s) => {
+    const el = document.getElementById('total-visitors');
+    if (el) el.innerText = s.val() || 0;
+  });
+
+  todayRef.on('value', (s) => {
+    const el = document.getElementById('today-visitors');
+    if (el) el.innerText = s.val() || 0;
+  });
+}
+
+// --- 4. Hệ thống Sidebar (Hover hiện - Click ngoài đóng) ---
+
+function openSidebar(id, direction) {
+  const sidebar = document.getElementById(id);
+  if (!sidebar) return;
+  const contents = sidebar.querySelectorAll('.sidebar-content');
+
+  // Xóa sạch TẤT CẢ class ẩn (kể cả bản mobile và bản desktop md:)
+  sidebar.classList.remove(
+    'translate-x-[-85%]',
+    'translate-x-[-70%]',
+    'translate-x-[85%]',
+    'translate-x-[70%]',
+    'md:translate-x-[-70%]', // THÊM DÒNG NÀY
+    'md:translate-x-[70%]', // THÊM DÒNG NÀY
+  );
+
+  // Ép hiển thị bằng class 0
+  sidebar.classList.add('translate-x-0');
+
+  // Hiện nội dung con
+  if (contents) {
+    contents.forEach((el) => el.classList.remove('opacity-0'));
+  }
+}
+
+function closeSidebar(id, direction) {
+  const sidebar = document.getElementById(id);
+  if (!sidebar) return;
+  const contents = sidebar.querySelectorAll('.sidebar-content');
+
+  // Xóa class mở
+  sidebar.classList.remove('translate-x-0');
+
+  // Thêm lại class ẩn gốc (phải có cả bản mobile và bản desktop md:)
+  if (direction === 'left') {
+    sidebar.classList.add('translate-x-[-85%]', 'md:translate-x-[-70%]');
+  } else {
+    sidebar.classList.add('translate-x-[85%]', 'md:translate-x-[70%]');
+  }
+
+  if (contents) contents.forEach((el) => el.classList.add('opacity-0'));
+}
+function initSidebars() {
+  const leftBar = document.getElementById('visitor-sidebar');
+  const rightBar = document.getElementById('social-sidebar');
+
+  // --- LEFT SIDEBAR ---
+  if (leftBar) {
+    // Hover mở
+    leftBar.addEventListener('mouseenter', () => openSidebar('visitor-sidebar', 'left'));
+
+    // RỜI CHUỘT -> đóng (desktop)
+    leftBar.addEventListener('mouseleave', () => closeSidebar('visitor-sidebar', 'left'));
+
+    // Click (mobile)
+    leftBar.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openSidebar('visitor-sidebar', 'left');
+    });
+  }
+
+  // --- RIGHT SIDEBAR ---
+  if (rightBar) {
+    rightBar.addEventListener('mouseenter', () => openSidebar('social-sidebar', 'right'));
+
+    rightBar.addEventListener('mouseleave', () => closeSidebar('social-sidebar', 'right'));
+
+    rightBar.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openSidebar('social-sidebar', 'right');
+    });
+  }
+
+  // --- CLICK OUTSIDE -> CLOSE ---
+  document.addEventListener('click', function (event) {
+    if (leftBar && !leftBar.contains(event.target)) {
+      closeSidebar('visitor-sidebar', 'left');
+    }
+    if (rightBar && !rightBar.contains(event.target)) {
+      closeSidebar('social-sidebar', 'right');
+    }
+  });
+}
