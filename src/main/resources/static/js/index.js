@@ -58,6 +58,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Khởi tạo các sự kiện Sidebar sau khi DOM load
   initSidebars();
+
+  // Khởi tạo Overlay Menu
+  initMenuOverlay();
 });
 
 // --- 3. Xử lý Firebase - Đếm lượt truy cập ---
@@ -105,8 +108,8 @@ if (typeof firebase !== 'undefined') {
     if (el) el.innerText = val.toLocaleString();
   });
 }
-// --- 4. Hệ thống Sidebar (Hover hiện - Click ngoài đóng) ---
 
+// --- 4. Hệ thống Sidebar (Hover hiện - Click ngoài đóng) ---
 function openSidebar(id, direction) {
   const sidebar = document.getElementById(id);
   if (!sidebar) return;
@@ -118,8 +121,8 @@ function openSidebar(id, direction) {
     'translate-x-[-70%]',
     'translate-x-[85%]',
     'translate-x-[70%]',
-    'md:translate-x-[-70%]', // THÊM DÒNG NÀY
-    'md:translate-x-[70%]', // THÊM DÒNG NÀY
+    'md:translate-x-[-70%]',
+    'md:translate-x-[70%]',
   );
 
   // Ép hiển thị bằng class 0
@@ -148,6 +151,7 @@ function closeSidebar(id, direction) {
 
   if (contents) contents.forEach((el) => el.classList.add('opacity-0'));
 }
+
 function initSidebars() {
   const leftBar = document.getElementById('visitor-sidebar');
   const rightBar = document.getElementById('social-sidebar');
@@ -186,6 +190,43 @@ function initSidebars() {
     }
     if (rightBar && !rightBar.contains(event.target)) {
       closeSidebar('social-sidebar', 'right');
+    }
+  });
+}
+
+// --- 5. Overlay Menu Modal ---
+function initMenuOverlay() {
+  const openBtn = document.getElementById('openMenuBtn');
+  const closeBtn = document.getElementById('closeMenuBtn');
+  const overlay = document.getElementById('menuOverlay');
+
+  if (!openBtn || !closeBtn || !overlay) return;
+
+  // Mở overlay
+  openBtn.addEventListener('click', () => {
+    overlay.classList.remove('hidden');
+    document.body.style.overflow = 'hidden'; // Ngăn scroll background
+  });
+
+  // Đóng overlay - nút X
+  closeBtn.addEventListener('click', () => {
+    overlay.classList.add('hidden');
+    document.body.style.overflow = ''; // Khôi phục scroll
+  });
+
+  // Đóng overlay - click bên ngoài
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) {
+      overlay.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+  });
+
+  // Đóng overlay - phím ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !overlay.classList.contains('hidden')) {
+      overlay.classList.add('hidden');
+      document.body.style.overflow = '';
     }
   });
 }
