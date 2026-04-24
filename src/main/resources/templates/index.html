@@ -1,325 +1,298 @@
 <!doctype html>
 <html lang="vi" xmlns:th="http://www.thymeleaf.org" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title th:text="${title}">Tiệm nước đong đưa</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta
-      name="description"
-      content="Tiệm nước đong đưa tại Đà Nẵng - Không gian thư giãn với các loại cà phê, trà sữa và thức uống giải nhiệt tuyệt vời."
-    />
-    <meta
-      name="keywords"
-      content="đong đưa, cafe đà nẵng, tiệm nước đà nẵng, trà sữa nguyễn lương bằng, đong đưa cafe, học bài, làm việc"
-    />
-    <meta name="author" content="Trần Đức Mạnh" />
-    <meta name="robots" content="index, follow" />
+  <title th:text="${title}">Tiệm nước đong đưa</title>
 
-    <meta property="og:type" content="website" />
-    <meta property="og:url" th:content="${currentUrl}" />
-    <meta property="og:title" th:content="${title}" />
-    <meta
-      property="og:description"
-      content="Thưởng thức hương vị đậm đà cùng không gian cực chill tại đong đưa Đà Nẵng."
-    />
-    <meta property="og:image" th:content="'https://dongdua-store-1.onrender.com/images/zalo.jpg'" />
-    <meta
-      property="og:image:secure_url"
-      content="https://dongdua-store-1.onrender.com/images/facebook.jpg"
-    />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+  <meta name="description"
+    content="Tiệm nước đong đưa tại Đà Nẵng - Không gian thư giãn với các loại cà phê, trà sữa và thức uống giải nhiệt tuyệt vời." />
+  <meta name="keywords"
+    content="đong đưa, cafe đà nẵng, tiệm nước đà nẵng, trà sữa nguyễn lương bằng, đong đưa cafe, học bài, làm việc" />
+  <meta name="author" content="Trần Đức Mạnh" />
+  <meta name="robots" content="index, follow" />
 
-    <link rel="icon" type="image/x-icon" th:href="@{/favicon/favicon.ico}" />
-    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/favicon/favicon-32x32.png}" />
-    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/favicon/favicon-16x16.png}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" th:content="${currentUrl}" />
+  <meta property="og:title" th:content="${title}" />
+  <meta property="og:description"
+    content="Thưởng thức hương vị đậm đà cùng không gian cực chill tại đong đưa Đà Nẵng." />
+  <meta property="og:image" th:content="'https://dongdua-store-1.onrender.com/images/zalo.jpg'" />
+  <meta property="og:image:secure_url" content="https://dongdua-store-1.onrender.com/images/facebook.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
 
-    <link rel="apple-touch-icon" sizes="180x180" th:href="@{/favicon/apple-touch-icon.png}" />
+  <link rel="icon" type="image/x-icon" th:href="@{/favicon/favicon.ico}" />
+  <link rel="icon" type="image/png" sizes="32x32" th:href="@{/favicon/favicon-32x32.png}" />
+  <link rel="icon" type="image/png" sizes="16x16" th:href="@{/favicon/favicon-16x16.png}" />
 
-    <link rel="manifest" th:href="@{/favicon/site.webmanifest}" />
+  <link rel="apple-touch-icon" sizes="180x180" th:href="@{/favicon/apple-touch-icon.png}" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap"
-      rel="stylesheet"
-    />
+  <link rel="manifest" th:href="@{/favicon/site.webmanifest}" />
 
-    <link th:href="@{/css/output.css}" rel="stylesheet" />
-    <style>
-      /* Cấu hình dây cờ */
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap"
+    rel="stylesheet" />
+
+  <link th:href="@{/css/output.css}" rel="stylesheet" />
+  <style>
+    /* Cấu hình dây cờ */
+    .vietnam-flag-string {
+      position: fixed;
+      top: 0;
+      left: -35px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      /* Giãn đều các lá cờ ra hết chiều ngang */
+      padding: 0 20px;
+      background-color: transparent;
+      z-index: 100;
+      pointer-events: none;
+    }
+
+    /* Cấu hình lá cờ lớn hơn */
+    .flag {
+      width: 45px;
+      /* Tăng chiều rộng */
+      height: 65px;
+      /* Tăng chiều cao */
+      background-color: #da251d;
+      position: relative;
+      border-radius: 0 0 3px 3px;
+      box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+
+      /* Hiệu ứng gió thổi */
+      transform-origin: top center;
+      animation: flagWave 3s ease-in-out infinite;
+      margin: 0 15px;
+    }
+
+    /* Tạo ngôi sao vàng lớn hơn */
+    .flag::after {
+      content: '★';
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #ffff00;
+      font-size: 28px;
+      /* Tăng kích thước sao */
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Hiệu ứng gió thổi phấp phới */
+    @keyframes flagWave {
+      0% {
+        transform: rotate(-5deg) skewX(2deg);
+      }
+
+      50% {
+        transform: rotate(5deg) skewX(-2deg);
+      }
+
+      100% {
+        transform: rotate(-5deg) skewX(2deg);
+      }
+    }
+
+    /* Làm cho mỗi lá cờ bay lệch nhịp nhau cho tự nhiên */
+    .flag:nth-child(even) {
+      animation-delay: 0.5s;
+      animation-duration: 3.5s;
+    }
+
+    .flag:nth-child(3n) {
+      animation-delay: 1s;
+      animation-duration: 4s;
+    }
+
+    @media (max-width: 480px) {
       .vietnam-flag-string {
-        position: fixed;
-        top: 0;
-        left: -35px;
-        width: 100%;
-        display: flex;
-        justify-content: center; /* Giãn đều các lá cờ ra hết chiều ngang */
-        padding: 0 20px;
-        background-color: transparent;
-        z-index: 100;
-        pointer-events: none;
+        top: 20px;
+        left: 90px;
+        /* Căn chỉnh lại vị trí */
+        padding: 0 10px;
       }
 
-      /* Cấu hình lá cờ lớn hơn */
+      /* Ẩn các lá cờ từ thứ 6 trở đi để chỉ còn lại 5 lá */
+      .flag:nth-child(n + 6) {
+        display: none;
+      }
+
+      /* Giảm kích thước và khoảng cách */
       .flag {
-        width: 45px; /* Tăng chiều rộng */
-        height: 65px; /* Tăng chiều cao */
-        background-color: #da251d;
-        position: relative;
-        border-radius: 0 0 3px 3px;
-        box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-
-        /* Hiệu ứng gió thổi */
-        transform-origin: top center;
-        animation: flagWave 3s ease-in-out infinite;
-        margin: 0 15px;
+        width: 30px;
+        /* Giảm từ 45px */
+        height: 45px;
+        /* Giảm từ 65px */
+        margin: 0 4px;
+        /* Giảm khoảng cách giữa các cờ */
       }
 
-      /* Tạo ngôi sao vàng lớn hơn */
+      /* Điều chỉnh lại kích thước ngôi sao cho khớp với cờ nhỏ */
       .flag::after {
-        content: '★';
-        position: absolute;
-        top: 45%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: #ffff00;
-        font-size: 28px; /* Tăng kích thước sao */
-        text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        font-size: 18px;
+        /* Giảm từ 28px */
+        top: 42%;
+        /* Căn chỉnh lại vị trí sao */
+      }
+    }
+
+    /* OVerlay MENU */
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background-color: #d4a373;
+      border-radius: 10px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background-color: #a95c31;
+    }
+
+    @keyframes letter-jump {
+
+      0%,
+      40%,
+      100% {
+        transform: translateY(0);
       }
 
-      /* Hiệu ứng gió thổi phấp phới */
-      @keyframes flagWave {
-        0% {
-          transform: rotate(-5deg) skewX(2deg);
-        }
-        50% {
-          transform: rotate(5deg) skewX(-2deg);
-        }
-        100% {
-          transform: rotate(-5deg) skewX(2deg);
-        }
+      20% {
+        transform: translateY(-10px);
       }
+    }
 
-      /* Làm cho mỗi lá cờ bay lệch nhịp nhau cho tự nhiên */
-      .flag:nth-child(even) {
-        animation-delay: 0.5s;
-        animation-duration: 3.5s;
-      }
+    .animate-letter-jump {
+      animation: letter-jump 1.5s infinite;
+    }
+  </style>
+</head>
 
-      .flag:nth-child(3n) {
-        animation-delay: 1s;
-        animation-duration: 4s;
-      }
-      @media (max-width: 480px) {
-        .vietnam-flag-string {
-          top: 20px;
-          left: 90px; /* Căn chỉnh lại vị trí */
-          padding: 0 10px;
-        }
+<body class="font-sans bg-coffee-50 text-coffee-900 antialiased selection:bg-coffee-200 selection:text-coffee-900">
+  <!-- Treo cờ -->
+  <div class="vietnam-flag-string">
+    <div class="flag"></div>
+    <div class="flag"></div>
+    <div class="flag"></div>
+    <div class="flag"></div>
+    <div class="flag"></div>
+    <div class="flag"></div>
+    <div class="flag"></div>
+    <div class="flag"></div>
+    <div class="flag"></div>
+  </div>
+  <!-- Navigation -->
+  <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-coffee-100 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-20">
+        <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer group">
+          <img th:src="@{/images/logoheader1.png}" alt="Logo 1"
+            class="h-14 w-auto object-contain transition-opacity group-hover:opacity-80" />
+          <img th:src="@{/images/logoheader2.png}" alt="Logo 2"
+            class="h-10 mt-4 w-auto object-contain transition-opacity group-hover:opacity-80" />
+        </div>
 
-        /* Ẩn các lá cờ từ thứ 6 trở đi để chỉ còn lại 5 lá */
-        .flag:nth-child(n + 6) {
-          display: none;
-        }
-
-        /* Giảm kích thước và khoảng cách */
-        .flag {
-          width: 30px; /* Giảm từ 45px */
-          height: 45px; /* Giảm từ 65px */
-          margin: 0 4px; /* Giảm khoảng cách giữa các cờ */
-        }
-
-        /* Điều chỉnh lại kích thước ngôi sao cho khớp với cờ nhỏ */
-        .flag::after {
-          font-size: 18px; /* Giảm từ 28px */
-          top: 42%; /* Căn chỉnh lại vị trí sao */
-        }
-      }
-      /* OVerlay MENU */
-      .custom-scrollbar::-webkit-scrollbar {
-        width: 6px;
-      }
-      .custom-scrollbar::-webkit-scrollbar-track {
-        background: transparent;
-      }
-      .custom-scrollbar::-webkit-scrollbar-thumb {
-        background-color: #d4a373;
-        border-radius: 10px;
-      }
-      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-        background-color: #a95c31;
-      }
-    </style>
-  </head>
-  <body
-    class="font-sans bg-coffee-50 text-coffee-900 antialiased selection:bg-coffee-200 selection:text-coffee-900"
-  >
-    <!-- Treo cờ -->
-    <div class="vietnam-flag-string">
-      <div class="flag"></div>
-      <div class="flag"></div>
-      <div class="flag"></div>
-      <div class="flag"></div>
-      <div class="flag"></div>
-      <div class="flag"></div>
-      <div class="flag"></div>
-      <div class="flag"></div>
-      <div class="flag"></div>
+        <div class="hidden md:flex space-x-8">
+          <a href="#about" class="text-brand-brown hover:text-coffee-900 font-medium transition-colors">Về chúng tôi</a>
+          <a href="#menu" class="text-brand-brown hover:text-coffee-900 font-medium transition-colors">Không gian</a>
+          <a href="#visit" class="text-brand-brown hover:text-coffee-900 font-medium transition-colors">Ghé thăm</a>
+        </div>
+        <div class="md:hidden flex items-center">
+          <button class="text-coffee-800 hover:text-coffee-600 focus:outline-none">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
     </div>
-    <!-- Navigation -->
-    <nav
-      class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-coffee-100 transition-all duration-300"
-    >
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-20">
-          <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer group">
-            <img
-              th:src="@{/images/logoheader1.png}"
-              alt="Logo 1"
-              class="h-14 w-auto object-contain transition-opacity group-hover:opacity-80"
-            />
-            <img
-              th:src="@{/images/logoheader2.png}"
-              alt="Logo 2"
-              class="h-10 mt-4 w-auto object-contain transition-opacity group-hover:opacity-80"
-            />
-          </div>
+  </nav>
 
-          <div class="hidden md:flex space-x-8">
-            <a
-              href="#about"
-              class="text-brand-brown hover:text-coffee-900 font-medium transition-colors"
-              >Về chúng tôi</a
-            >
-            <a
-              href="#menu"
-              class="text-brand-brown hover:text-coffee-900 font-medium transition-colors"
-              >Không gian</a
-            >
-            <a
-              href="#visit"
-              class="text-brand-brown hover:text-coffee-900 font-medium transition-colors"
-              >Ghé thăm</a
-            >
-          </div>
-          <div class="md:hidden flex items-center">
-            <button class="text-coffee-800 hover:text-coffee-600 focus:outline-none">
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                ></path>
-              </svg>
-            </button>
-          </div>
+  <!-- Hero Section -->
+  <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img th:src="@{/images/1.jpg}" alt="Coffee Shop Exterior"
+        class="w-full h-full object-cover opacity-90 object-center" />
+      <div class="absolute inset-0 bg-gradient-to-r from-coffee-900/80 to-coffee-900/40"></div>
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left">
+      <div class="md:w-2/3 lg:w-1/2">
+        <p class="text-coffee-200 font-medium tracking-widest uppercase mb-3 drop-shadow-md text-center md:text-left">
+          Chào mừng đến với
+        </p>
+
+        <h1
+          class="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white leading-tight mb-6 drop-shadow-lg flex flex-col items-center md:items-start">
+          <span>Tiệm nước</span>
+
+          <img th:src="@{/images/logoheader3.png}" alt="Logo 2"
+            class="h-14 mt-4 w-auto object-contain transition-opacity group-hover:opacity-80" />
+        </h1>
+
+        <p id="typing-text"
+          class="text-lg md:text-xl text-coffee-100 mb-10 max-w-lg leading-relaxed drop-shadow-md text-center md:text-left"
+          data-text="Giữa nhịp sống tất bật của thành phố, tiệm nước mở ra một khoảng không hoài niệm – nơi bạn có thể tự do học tập, say mê làm việc, hay đơn giản là tự tình cùng những bản nhạc dịu êm.">
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+          <a href="#visit"
+            class="px-8 py-4 bg-white text-coffee-900 rounded-full font-medium shadow-lg hover:bg-coffee-100 transition-all transform hover:-translate-y-1 text-center">
+            Đặt sự kiện
+          </a>
+          <button id="openMenuBtn"
+            class="px-8 py-4 bg-coffee-800/80 text-white border border-coffee-400 rounded-full font-medium hover:bg-coffee-700/80 backdrop-blur-sm transition-all text-center">
+            Thực đơn
+          </button>
         </div>
       </div>
-    </nav>
+    </div>
+  </section>
+  <!-- About Section -->
+  <section id="about" class="py-20 lg:py-32 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col lg:flex-row items-center gap-16">
+        <div class="lg:w-1/2 relative">
+          <div
+            class="absolute top-4 left-4 w-[calc(100%+2rem)] w-full max-w-[450px] h-full border-2 border-brand-brown rounded-2xl z-0">
+          </div>
 
-    <!-- Hero Section -->
-    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-      <div class="absolute inset-0 z-0">
-        <img
-          th:src="@{/images/1.jpg}"
-          alt="Coffee Shop Exterior"
-          class="w-full h-full object-cover opacity-90 object-center"
-        />
-        <div class="absolute inset-0 bg-gradient-to-r from-coffee-900/80 to-coffee-900/40"></div>
-      </div>
-      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:text-left">
-        <div class="md:w-2/3 lg:w-1/2">
-          <p
-            class="text-coffee-200 font-medium tracking-widest uppercase mb-3 drop-shadow-md text-center md:text-left"
-          >
-            Chào mừng đến với
-          </p>
-
-          <h1
-            class="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white leading-tight mb-6 drop-shadow-lg flex flex-col items-center md:items-start"
-          >
-            <span>Tiệm nước</span>
-
-            <img
-              th:src="@{/images/logoheader3.png}"
-              alt="Logo 2"
-              class="h-14 mt-4 w-auto object-contain transition-opacity group-hover:opacity-80"
-            />
-          </h1>
-
-          <p
-            class="text-lg md:text-xl text-coffee-100 mb-10 max-w-lg leading-relaxed drop-shadow-md text-center md:text-left"
-          >
-            Giữa nhịp sống tất bật của thành phố, tiệm nước mở ra một khoảng không hoài niệm – nơi
-            bạn có thể tự do học tập, say mê làm việc, hay đơn giản là tự tình cùng những bản nhạc
-            dịu êm.
-          </p>
-
-          <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-            <a
-              href="#visit"
-              class="px-8 py-4 bg-white text-coffee-900 rounded-full font-medium shadow-lg hover:bg-coffee-100 transition-all transform hover:-translate-y-1 text-center"
-            >
-              Đặt sự kiện
-            </a>
-            <button
-              id="openMenuBtn"
-              class="px-8 py-4 bg-coffee-800/80 text-white border border-coffee-400 rounded-full font-medium hover:bg-coffee-700/80 backdrop-blur-sm transition-all text-center"
-            >
-              Thực đơn
-            </button>
+          <div class="relative z-10 w-full flex justify-center">
+            <img th:src="@{/images/hero1.jpg}" alt="Artisanal Vietnamese Coffee"
+              class="w-full max-w-[450px] h-auto rounded-2xl shadow-2xl object-contain border-2 border-brand-brown transition-transform hover:scale-105" />
+          </div>
+          <div
+            class="absolute -bottom-10 -right-8 w-48 h-48 bg-coffee-100 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-blob">
           </div>
         </div>
-      </div>
-    </section>
-    <!-- About Section -->
-    <section id="about" class="py-20 lg:py-32 bg-white">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex flex-col lg:flex-row items-center gap-16">
-          <div class="lg:w-1/2 relative">
-            <div
-              class="absolute top-4 left-4 w-[calc(100%+2rem)] w-full max-w-[450px] h-full border-2 border-brand-brown rounded-2xl z-0"
-            ></div>
+        <div class="lg:w-1/2">
+          <h2 class="text-sm font-bold text-coffee-500 uppercase tracking-widest mb-2">
+            Về chúng tôi
+          </h2>
+          <h3 class="text-4xl font-serif font-bold text-coffee-900 mb-6">
+            Hơn cả một ly nước ngon tuyệt.
+          </h3>
+          <p class="text-lg text-brand-brown leading-relaxed flex items-center flex-wrap gap-x-1.5">
+            <img th:src="@{/images/logoheader2.png}  " alt="Đong Đưa"
+              class="h-6 w-auto object-contain transition-opacity" />
+            <span>chăm chút từng sản phẩm với mong muốn nơi đây</span>
+          </p>
+          <p class="text-lg text-brand-brown leading-relaxed flex items-center flex-wrap gap-x-1.5 mb-6">
+            sẽ luôn là ngôi nhà thứ hai trong tâm trí của bạn
+          </p>
 
-            <div class="relative z-10 w-full flex justify-center">
-              <img
-                th:src="@{/images/hero1.jpg}"
-                alt="Artisanal Vietnamese Coffee"
-                class="w-full max-w-[450px] h-auto rounded-2xl shadow-2xl object-contain border-2 border-brand-brown transition-transform hover:scale-105"
-              />
-            </div>
-            <div
-              class="absolute -bottom-10 -right-8 w-48 h-48 bg-coffee-100 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-blob"
-            ></div>
-          </div>
-          <div class="lg:w-1/2">
-            <h2 class="text-sm font-bold text-coffee-500 uppercase tracking-widest mb-2">
-              Về chúng tôi
-            </h2>
-            <h3 class="text-4xl font-serif font-bold text-coffee-900 mb-6">
-              Hơn cả một ly nước ngon tuyệt.
-            </h3>
-            <p
-              class="text-lg text-brand-brown leading-relaxed flex items-center flex-wrap gap-x-1.5"
-            >
-              <img
-                th:src="@{/images/logoheader2.png}  "
-                alt="Đong Đưa"
-                class="h-6 w-auto object-contain transition-opacity"
-              />
-              <span>chăm chút từng sản phẩm với mong muốn nơi đây</span>
-            </p>
-            <p
-              class="text-lg text-brand-brown leading-relaxed flex items-center flex-wrap gap-x-1.5 mb-6"
-            >
-              sẽ luôn là ngôi nhà thứ hai trong tâm trí của bạn
-            </p>
-
-            <!-- <div class="grid grid-cols-2 gap-6">
+          <!-- <div class="grid grid-cols-2 gap-6">
               <div class="border-l-4 border-coffee-400 pl-4">
                 <p class="text-3xl font-bold text-coffee-900 mb-1">Premium</p>
                 <p class="text-sm text-coffee-600">Locally sourced beans</p>
@@ -329,494 +302,318 @@
                 <p class="text-sm text-coffee-600">Aesthetic environment</p>
               </div>
             </div> -->
-          </div>
         </div>
       </div>
-    </section>
-    <!-- Info Section -->
-    <section id="visit" class="py-20 lg:py-32 bg-brand-brown text-white relative overflow-hidden">
-      <div class="absolute top-0 left-0 w-full h-full opacity-10"></div>
+    </div>
+  </section>
+  <!-- Info Section -->
+  <section id="visit" class="py-20 lg:py-32 bg-brand-brown text-white relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-full h-full opacity-10"></div>
 
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div class="text-center mb-16">
-          <h2 class="text-4xl font-serif font-bold mb-4">Ghé thăm</h2>
-          <p class="text-coffee-100 max-w-2xl mx-auto text-lg">
-            Nhanh lên nào chúng tôi đang đợi bạn đến
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center mb-16">
+        <h2
+          class="text-4xl font-serif font-bold mb-4 cursor-pointer hover:text-brand-brown/80 transition-colors flex justify-center">
+          <span class="inline-block animate-letter-jump" style="animation-delay: 0.0s">G</span>
+          <span class="inline-block animate-letter-jump" style="animation-delay: 0.1s">h</span>
+          <span class="inline-block animate-letter-jump" style="animation-delay: 0.2s">é</span>
+          <span class="inline-block animate-letter-jump w-6" style="animation-delay: 0.3s"> </span>
+          <span class="inline-block animate-letter-jump" style="animation-delay: 0.4s">t</span>
+          <span class="inline-block animate-letter-jump" style="animation-delay: 0.5s">h</span>
+          <span class="inline-block animate-letter-jump" style="animation-delay: 0.6s">ă</span>
+          <span class="inline-block animate-letter-jump" style="animation-delay: 0.7s">m</span>
+        </h2>
+        <p class="text-coffee-100 max-w-2xl mx-auto text-lg">
+          Nhanh lên nào chúng tôi đang đợi bạn đến
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div
+          class="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 hover:-translate-y-2 transition-transform duration-300">
+          <div class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center mb-6 mx-auto">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-center mb-3 text-white">Địa chỉ</h3>
+          <p class="text-coffee-50 text-center leading-relaxed">
+            861 Nguyễn Lương Bằng,<br />
+            phường Hải Vân,<br />
+            thành phố Đà Nẵng
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
-          <div
-            class="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 hover:-translate-y-2 transition-transform duration-300"
-          >
-            <div
-              class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center mb-6 mx-auto"
-            >
-              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                ></path>
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                ></path>
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-center mb-3 text-white">Địa chỉ</h3>
-            <p class="text-coffee-50 text-center leading-relaxed">
-              861 Nguyễn Lương Bằng,<br />
-              phường Hải Vân,<br />
-              thành phố Đà Nẵng
-            </p>
+        <div
+          class="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 hover:-translate-y-2 transition-transform duration-300">
+          <div class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center mb-6 mx-auto">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
           </div>
-
-          <div
-            class="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 hover:-translate-y-2 transition-transform duration-300"
-          >
-            <div
-              class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center mb-6 mx-auto"
-            >
-              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                ></path>
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-center mb-3 text-white">Giờ mở cửa</h3>
-            <div class="text-coffee-50 text-center space-y-2">
-              <div class="flex flex-col border-b border-white/20 pb-2">
-                <div>Thứ Hai - Chủ Nhật</div>
-                <div class="font-medium text-white">10:00 AM - 10:00 PM</div>
-              </div>
-            </div>
-            <p class="text-sm text-coffee-200 text-center mt-4 italic">
-              Mở cửa hàng ngày để phục vụ bạn.
-            </p>
-          </div>
-
-          <div
-            class="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 hover:-translate-y-2 transition-transform duration-300"
-          >
-            <div
-              class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center mb-6 mx-auto"
-            >
-              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
-                ></path>
-              </svg>
-            </div>
-            <h3 class="text-xl font-bold text-center mb-3 text-white">Kết nối</h3>
-            <p class="text-coffee-50 text-center mb-4">
-              <a
-                href="https://dongdua-store-1.onrender.com/"
-                class="hover:scale-105 transition-colors underline underline-offset-4 decoration-white/30"
-                >Website và Fanpage của đong đưa</a
-              >
-            </p>
-            <div class="flex justify-center space-x-4 mt-6">
-              <a
-                href="https://www.facebook.com/profile.php?id=61572160731567"
-                class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/40 transition-colors"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
-                  <!--!Font Awesome Free v7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
-                  <path
-                    fill="rgb(255, 255, 255)"
-                    d="M240 363.3L240 576L356 576L356 363.3L442.5 363.3L460.5 265.5L356 265.5L356 230.9C356 179.2 376.3 159.4 428.7 159.4C445 159.4 458.1 159.8 465.7 160.6L465.7 71.9C451.4 68 416.4 64 396.2 64C289.3 64 240 114.5 240 223.4L240 265.5L174 265.5L174 363.3L240 363.3z"
-                  />
-                </svg>
-              </a>
-              <a
-                href="https://dongdua-store-1.onrender.com/"
-                class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/40 transition-colors"
-              >
-                <svg
-                  class="w-6 h-6 text-white"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
-                  ></path>
-                </svg>
-              </a>
+          <h3 class="text-xl font-bold text-center mb-3 text-white">Giờ mở cửa</h3>
+          <div class="text-coffee-50 text-center space-y-2">
+            <div class="flex flex-col border-b border-white/20 pb-2">
+              <div>Thứ Hai - Chủ Nhật</div>
+              <div class="font-medium text-white">10:00 AM - 10:00 PM</div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-    <!-- Space Section -->
-    <section id="menu" class="py-20 bg-coffee-50">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <h2 class="text-3xl font-serif font-bold text-coffee-900 uppercase tracking-widest">
-            Không gian
-          </h2>
-          <div class="w-24 h-1 bg-brand-brown mx-auto mt-4"></div>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
-          <div
-            class="relative group overflow-hidden rounded-3xl shadow-lg border border-white h-[400px] bg-transparent"
-          >
-            <img
-              id="img-tang-1"
-              src="/images/t11.jpg"
-              alt="Tầng 1"
-              class="w-full h-full object-cover transition-opacity duration-500"
-            />
-            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all"></div>
-
-            <button
-              onclick="changeImage('img-tang-1', 't1', -1, 7)"
-              class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/50 p-2 rounded-full text-white backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity"
-            >
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M15 19l-7-7 7-7"
-                ></path>
-              </svg>
-            </button>
-            <button
-              onclick="changeImage('img-tang-1', 't1', 1, 7)"
-              class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/50 p-2 rounded-full text-white backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity"
-            >
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 5l7 7-7 7"
-                ></path>
-              </svg>
-            </button>
-
-            <div
-              class="absolute bottom-6 left-6 text-white font-serif font-bold text-xl drop-shadow-md"
-            >
-              Tầng 1
-            </div>
-          </div>
-
-          <div
-            class="relative group overflow-hidden rounded-3xl shadow-lg border border-white h-[400px] bg-transparent"
-          >
-            <img
-              id="img-tang-2"
-              th:src="@{/images/t21.jpg}"
-              alt="Tầng 2"
-              class="w-full h-full object-cover transition-opacity duration-500"
-            />
-            <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all"></div>
-
-            <button
-              onclick="changeImage('img-tang-2', 't2', -1, 7)"
-              class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/50 p-2 rounded-full text-white backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity"
-            >
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M15 19l-7-7 7-7"
-                ></path>
-              </svg>
-            </button>
-            <button
-              onclick="changeImage('img-tang-2', 't2', 1, 7)"
-              class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/50 p-2 rounded-full text-white backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity"
-            >
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 5l7 7-7 7"
-                ></path>
-              </svg>
-            </button>
-
-            <div
-              class="absolute bottom-6 left-6 text-white font-serif font-bold text-xl drop-shadow-md"
-            >
-              Tầng 2
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Footer -->
-    <footer class="bg-brand-brown text-coffee-300 py-6 border-t border-brand-brown">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-4">
-          <div class="space-y-4">
-            <h4 class="text-white font-serif text-lg font-bold mb-4 flex items-center gap-2">
-              <svg
-                class="w-5 h-5 text-coffee-400"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                ></path>
-              </svg>
-              Tìm chúng tôi tại
-            </h4>
-            <div class="rounded-2xl overflow-hidden h-48 border border-coffee-800">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4636.767271686297!2d108.12895447583193!3d16.107254238417475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31421f55b9306edb%3A0x987cc6aaa2d9ce63!2zVGnhu4dtIG7GsOG7m2MgxJFvbmcgxJHGsGE!5e1!3m2!1svi!2sus!4v1776407448680!5m2!1svi!2sus"
-                width="100%"
-                height="100%"
-                style="border: 0"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-              ></iframe>
-            </div>
-          </div>
-
-          <div class="md:pl-10">
-            <h4 class="text-white font-serif text-lg font-bold mb-6">Chính sách</h4>
-            <ul class="space-y-4 text-white">
-              <li>
-                <a
-                  href="#"
-                  class="hover:translate-x-2 transition-all flex items-center gap-2 group"
-                >
-                  <span
-                    class="w-1.5 h-1.5 rounded-full bg-coffee-600 group-hover:bg-coffee-400"
-                  ></span>
-                  Chương trình Thành viên
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="hover:translate-x-2 transition-all flex items-center gap-2 group"
-                >
-                  <span
-                    class="w-1.5 h-1.5 rounded-full bg-coffee-600 group-hover:bg-coffee-400"
-                  ></span>
-                  Chính sách Giao hàng
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="hover:translate-x-2 transition-all flex items-center gap-2 group"
-                >
-                  <span
-                    class="w-1.5 h-1.5 rounded-full bg-coffee-600 group-hover:bg-coffee-400"
-                  ></span>
-                  Tuyển dụng đồng đội
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="hover:translate-x-2 transition-all flex items-center gap-2 group"
-                >
-                  <span
-                    class="w-1.5 h-1.5 rounded-full bg-coffee-600 group-hover:bg-coffee-400"
-                  ></span>
-                  Bảo mật thông tin
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div>
-            <h4 class="text-white font-serif text-lg font-bold mb-6">Hộp thư góp ý</h4>
-            <form id="feedbackForm" class="space-y-3">
-              <textarea
-                id="feedbackMessage"
-                name="message"
-                rows="3"
-                placeholder="Điều bạn muốn nhắn nhủ..."
-                class="w-full bg-white border border-coffee-800 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-coffee-500 transition-colors text-coffee-900"
-                required
-              ></textarea>
-              <button
-                type="submit"
-                class="w-full bg-white font-medium py-2 rounded-lg transition-colors text-sm text-brand-brown shadow-lg active:scale-95 transition-transform"
-              >
-                Gửi góp ý
-              </button>
-            </form>
-          </div>
+          <p class="text-sm text-coffee-200 text-center mt-4 italic">
+            Mở cửa hàng ngày để phục vụ bạn.
+          </p>
         </div>
 
         <div
-          class="pt-4 border-t border-coffee-900 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white"
-        >
-          <div class="flex items-center gap-3">
-            <p>© 2026 Tiệm nước đong đưa. All rights reserved.</p>
+          class="bg-white/10 backdrop-blur-sm p-8 rounded-2xl border border-white/20 hover:-translate-y-2 transition-transform duration-300">
+          <div class="w-14 h-14 bg-white/20 rounded-full flex items-center justify-center mb-6 mx-auto">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9">
+              </path>
+            </svg>
           </div>
-          <div class="flex space-x-6">
-            <span>Design by vidom</span>
-            <span>Đà Nẵng, Việt Nam</span>
+          <h3 class="text-xl font-bold text-center mb-3 text-white">Kết nối</h3>
+          <p class="text-coffee-50 text-center mb-4">
+            <a href="https://dongdua-store-1.onrender.com/"
+              class="hover:scale-105 transition-colors underline underline-offset-4 decoration-white/30">Website và
+              Fanpage của đong đưa</a>
+          </p>
+          <div class="flex justify-center space-x-4 mt-6">
+            <a href="https://www.facebook.com/profile.php?id=61572160731567"
+              class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/40 transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640">
+                <!--!Font Awesome Free v7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.-->
+                <path fill="rgb(255, 255, 255)"
+                  d="M240 363.3L240 576L356 576L356 363.3L442.5 363.3L460.5 265.5L356 265.5L356 230.9C356 179.2 376.3 159.4 428.7 159.4C445 159.4 458.1 159.8 465.7 160.6L465.7 71.9C451.4 68 416.4 64 396.2 64C289.3 64 240 114.5 240 223.4L240 265.5L174 265.5L174 363.3L240 363.3z" />
+              </svg>
+            </a>
+            <a href="https://dongdua-store-1.onrender.com/"
+              class="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center hover:bg-white/40 transition-colors">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9">
+                </path>
+              </svg>
+            </a>
           </div>
         </div>
       </div>
-    </footer>
-    <div
-      id="visitor-sidebar"
-      class="fixed left-0 top-1/2 -translate-y-1/2 z-[60] flex flex-col gap-6 bg-white/90 backdrop-blur-md p-3 rounded-r-2xl shadow-xl border border-l-0 border-brand-brown transition-all duration-500 cursor-pointer translate-x-[-85%] md:translate-x-[-70%]"
-    >
-      <div class="absolute right-1 top-1/2 -translate-y-1/2 flex flex-col items-center">
-        <div class="w-1.5 h-12 bg-brand-brown/30 rounded-full"></div>
+    </div>
+  </section>
+  <!-- Space Section -->
+  <section id="menu" class="py-20 bg-coffee-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-serif font-bold text-coffee-900 uppercase tracking-widest">
+          Không gian
+        </h2>
+        <div class="w-24 h-1 bg-brand-brown mx-auto mt-4"></div>
       </div>
 
-      <div class="relative flex flex-col items-center group">
-        <span
-          id="today-visitors"
-          class="absolute -top-2 -right-2 bg-brand-brown text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center shadow-sm opacity-0 sidebar-content transition-opacity duration-300"
-          >0</span
-        >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 640 640"
-          class="w-8 h-8 text-[#a95c31]"
-        >
-          <path
-            fill="currentColor"
-            d="M376 88C376 57.1 350.9 32 320 32C289.1 32 264 57.1 264 88C264 118.9 289.1 144 320 144C350.9 144 376 118.9 376 88zM400 300.7L446.3 363.1C456.8 377.3 476.9 380.3 491.1 369.7C505.3 359.1 508.3 339.1 497.7 324.9L427.2 229.9C402 196 362.3 176 320 176C277.7 176 238 196 212.8 229.9L142.3 324.9C131.8 339.1 134.7 359.1 148.9 369.7C163.1 380.3 183.1 377.3 193.7 363.1L240 300.7L240 576C240 593.7 254.3 608 272 608C289.7 608 304 593.7 304 576L304 416C304 407.2 311.2 400 320 400C328.8 400 336 407.2 336 416L336 576C336 593.7 350.3 608 368 608C385.7 608 400 593.7 400 576L400 300.7z"
-          />
-        </svg>
-        <span
-          class="absolute left-14 bg-coffee-900 text-white text-[10px] py-1 px-2 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity"
-          >Hôm nay</span
-        >
-      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+        <div class="relative group overflow-hidden rounded-3xl shadow-lg border border-white h-[400px] bg-transparent">
+          <img id="img-tang-1" src="/images/t11.jpg" alt="Tầng 1"
+            class="w-full h-full object-cover transition-opacity duration-500" />
+          <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all"></div>
 
-      <div class="relative flex flex-col items-center group">
-        <span
-          id="total-visitors"
-          class="absolute -top-2 -right-2 bg-brand-brown text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center shadow-sm opacity-0 sidebar-content transition-opacity duration-300"
-          >0</span
-        >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 640 640"
-          class="w-8 h-8 text-[#a95c31]"
-        >
-          <path
-            fill="currentColor"
-            d="M224 64C206.3 64 192 78.3 192 96L192 128L160 128C124.7 128 96 156.7 96 192L96 240L544 240L544 192C544 156.7 515.3 128 480 128L448 128L448 96C448 78.3 433.7 64 416 64C398.3 64 384 78.3 384 96L384 128L256 128L256 96C256 78.3 241.7 64 224 64zM96 288L96 480C96 515.3 124.7 544 160 544L480 544C515.3 544 544 515.3 544 480L544 288L96 288z"
-          />
-        </svg>
-        <span
-          class="absolute left-14 bg-coffee-900 text-white text-[10px] py-1 px-2 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity"
-          >Tổng lượt xem</span
-        >
+          <button onclick="changeImage('img-tang-1', 't1', -1, 7)"
+            class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/50 p-2 rounded-full text-white backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+          <button onclick="changeImage('img-tang-1', 't1', 1, 7)"
+            class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/50 p-2 rounded-full text-white backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </button>
+
+          <div class="absolute bottom-6 left-6 text-white font-serif font-bold text-xl drop-shadow-md">
+            Tầng 1
+          </div>
+        </div>
+
+        <div class="relative group overflow-hidden rounded-3xl shadow-lg border border-white h-[400px] bg-transparent">
+          <img id="img-tang-2" th:src="@{/images/t21.jpg}" alt="Tầng 2"
+            class="w-full h-full object-cover transition-opacity duration-500" />
+          <div class="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-all"></div>
+
+          <button onclick="changeImage('img-tang-2', 't2', -1, 7)"
+            class="absolute left-2 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/50 p-2 rounded-full text-white backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+            </svg>
+          </button>
+          <button onclick="changeImage('img-tang-2', 't2', 1, 7)"
+            class="absolute right-2 top-1/2 -translate-y-1/2 bg-white/30 hover:bg-white/50 p-2 rounded-full text-white backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-opacity">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </button>
+
+          <div class="absolute bottom-6 left-6 text-white font-serif font-bold text-xl drop-shadow-md">
+            Tầng 2
+          </div>
+        </div>
       </div>
     </div>
-    <div
-      id="social-sidebar"
-      class="fixed right-0 top-1/2 -translate-y-1/2 z-[60] flex flex-col gap-4 md:gap-6 bg-white/90 backdrop-blur-md p-2 md:p-3 rounded-l-2xl shadow-xl border border-r-0 border-brand-brown transition-all duration-500 cursor-pointer translate-x-[85%] md:translate-x-[70%]"
-    >
-      <div class="absolute left-1 top-1/2 -translate-y-1/2 flex flex-col items-center">
-        <div class="w-1 h-8 md:w-1.5 md:h-12 bg-brand-brown/30 rounded-full"></div>
+  </section>
+  <!-- Footer -->
+  <footer class="bg-brand-brown text-coffee-300 py-6 border-t border-brand-brown">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-4">
+        <div class="space-y-4">
+          <h4 class="text-white font-serif text-lg font-bold mb-4 flex items-center gap-2">
+            <svg class="w-5 h-5 text-coffee-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+            </svg>
+            Tìm chúng tôi tại
+          </h4>
+          <div class="rounded-2xl overflow-hidden h-48 border border-coffee-800">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4636.767271686297!2d108.12895447583193!3d16.107254238417475!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31421f55b9306edb%3A0x987cc6aaa2d9ce63!2zVGnhu4dtIG7GsOG7m2MgxJFvbmcgxJHGsGE!5e1!3m2!1svi!2sus!4v1776407448680!5m2!1svi!2sus"
+              width="100%" height="100%" style="border: 0" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+
+        <div class="md:pl-10">
+          <h4 class="text-white font-serif text-lg font-bold mb-6">Chính sách</h4>
+          <ul class="space-y-4 text-white">
+            <li>
+              <a href="#" class="hover:translate-x-2 transition-all flex items-center gap-2 group">
+                <span class="w-1.5 h-1.5 rounded-full bg-coffee-600 group-hover:bg-coffee-400"></span>
+                Chương trình Thành viên
+              </a>
+            </li>
+            <li>
+              <a href="#" class="hover:translate-x-2 transition-all flex items-center gap-2 group">
+                <span class="w-1.5 h-1.5 rounded-full bg-coffee-600 group-hover:bg-coffee-400"></span>
+                Chính sách Giao hàng
+              </a>
+            </li>
+            <li>
+              <a href="#" class="hover:translate-x-2 transition-all flex items-center gap-2 group">
+                <span class="w-1.5 h-1.5 rounded-full bg-coffee-600 group-hover:bg-coffee-400"></span>
+                Tuyển dụng đồng đội
+              </a>
+            </li>
+            <li>
+              <a href="#" class="hover:translate-x-2 transition-all flex items-center gap-2 group">
+                <span class="w-1.5 h-1.5 rounded-full bg-coffee-600 group-hover:bg-coffee-400"></span>
+                Bảo mật thông tin
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-white font-serif text-lg font-bold mb-6">Hộp thư góp ý</h4>
+          <form id="feedbackForm" class="space-y-3">
+            <textarea id="feedbackMessage" name="message" rows="3" placeholder="Điều bạn muốn nhắn nhủ..."
+              class="w-full bg-white border border-coffee-800 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-coffee-500 transition-colors text-coffee-900"
+              required></textarea>
+            <button type="submit"
+              class="w-full bg-white font-medium py-2 rounded-lg transition-colors text-sm text-brand-brown shadow-lg active:scale-95 transition-transform">
+              Gửi góp ý
+            </button>
+          </form>
+        </div>
       </div>
 
-      <a
-        href="https://www.facebook.com/profile.php?id=61572160731567"
-        target="_blank"
-        class="relative group flex flex-col items-center"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 640 640"
-          class="w-6 h-6 md:w-8 md:h-8 text-[#a95c31]"
-        >
-          <path
-            fill="currentColor"
-            d="M240 363.3L240 576L356 576L356 363.3L442.5 363.3L460.5 265.5L356 265.5L356 230.9C356 179.2 376.3 159.4 428.7 159.4C445 159.4 458.1 159.8 465.7 160.6L465.7 71.9C451.4 68 416.4 64 396.2 64C289.3 64 240 114.5 240 223.4L240 265.5L174 265.5L174 363.3L240 363.3z"
-          />
-        </svg>
-        <span
-          class="hidden md:block absolute right-14 bg-coffee-900 text-white text-[10px] py-1 px-2 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity"
-          >Facebook</span
-        >
-      </a>
-
-      <a
-        href="https://dongdua-store-1.onrender.com/"
-        target="_blank"
-        class="relative group flex flex-col items-center"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 640 640"
-          class="w-6 h-6 md:w-8 md:h-8 text-[#a95c31]"
-        >
-          <!--!Font Awesome Pro v7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2026 Fonticons, Inc.-->
-          <path
-            fill="#a95c31"
-            d="M288 88C288 74.7 298.7 64 312 64C457.8 64 576 182.2 576 328C576 341.3 565.3 352 552 352C538.7 352 528 341.3 528 328C528 208.7 431.3 112 312 112C298.7 112 288 101.3 288 88zM144 160C170.5 160 192 181.5 192 208L192 432C192 458.5 213.5 480 240 480C266.5 480 288 458.5 288 432C288 405.5 266.5 384 240 384C231.2 384 224 376.8 224 368L224 304C224 295.2 231.2 288 240 288C319.5 288 384 352.5 384 432C384 511.5 319.5 576 240 576C160.5 576 96 511.5 96 432L96 208C96 181.5 117.5 160 144 160zM312 160C404.8 160 480 235.2 480 328C480 341.3 469.3 352 456 352C442.7 352 432 341.3 432 328C432 261.7 378.3 208 312 208C298.7 208 288 197.3 288 184C288 170.7 298.7 160 312 160z"
-          />
-        </svg>
-        <span
-          class="hidden md:block absolute right-14 bg-coffee-900 text-white text-[10px] py-1 px-2 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity"
-          >Website</span
-        >
-      </a>
-    </div>
-    <div
-      id="menuOverlay"
-      class="fixed inset-0 z-[9999] bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-2 md:p-2"
-    >
       <div
-        class="bg-[#fcfaf7] rounded shadow-2xl w-full max-w-[1100px] max-h-[95vh] relative overflow-hidden flex flex-col border-[3px] border-brand-brown transform transition-all"
-      >
-        <button
-          id="closeMenuBtn"
-          class="absolute top-5 right-6 z-20 text-brand-brown hover:rotate-90 transition-all duration-300"
-        >
-          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            ></path>
-          </svg>
-        </button>
-
-        <div class="p-2 md:p-4 overflow-y-auto custom-scrollbar flex-1">
-          <img
-            th:src="@{/images/menu.jpg}"
-            alt="Menu"
-            class="w-full h-auto object-contain rounded-xl"
-          />
+        class="pt-4 border-t border-coffee-900 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white">
+        <div class="flex items-center gap-3">
+          <p>© 2026 Tiệm nước đong đưa. All rights reserved.</p>
+        </div>
+        <div class="flex space-x-6">
+          <span>Design by vidom</span>
+          <span>Đà Nẵng, Việt Nam</span>
         </div>
       </div>
     </div>
-    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database-compat.js"></script>
-    <script th:src="@{/js/index.js}"></script>
-  </body>
+  </footer>
+  <div id="visitor-sidebar"
+    class="fixed left-0 top-1/2 -translate-y-1/2 z-[60] flex flex-col gap-6 bg-white/90 backdrop-blur-md p-3 rounded-r-2xl shadow-xl border border-l-0 border-brand-brown transition-all duration-500 cursor-pointer translate-x-[-85%] md:translate-x-[-70%]">
+    <div class="absolute right-1 top-1/2 -translate-y-1/2 flex flex-col items-center">
+      <div class="w-1.5 h-12 bg-brand-brown/30 rounded-full"></div>
+    </div>
+
+    <div class="relative flex flex-col items-center group">
+      <span id="today-visitors"
+        class="absolute -top-2 -right-2 bg-brand-brown text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center shadow-sm opacity-0 sidebar-content transition-opacity duration-300">0</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-8 h-8 text-[#a95c31]">
+        <path fill="currentColor"
+          d="M376 88C376 57.1 350.9 32 320 32C289.1 32 264 57.1 264 88C264 118.9 289.1 144 320 144C350.9 144 376 118.9 376 88zM400 300.7L446.3 363.1C456.8 377.3 476.9 380.3 491.1 369.7C505.3 359.1 508.3 339.1 497.7 324.9L427.2 229.9C402 196 362.3 176 320 176C277.7 176 238 196 212.8 229.9L142.3 324.9C131.8 339.1 134.7 359.1 148.9 369.7C163.1 380.3 183.1 377.3 193.7 363.1L240 300.7L240 576C240 593.7 254.3 608 272 608C289.7 608 304 593.7 304 576L304 416C304 407.2 311.2 400 320 400C328.8 400 336 407.2 336 416L336 576C336 593.7 350.3 608 368 608C385.7 608 400 593.7 400 576L400 300.7z" />
+      </svg>
+      <span
+        class="absolute left-14 bg-coffee-900 text-white text-[10px] py-1 px-2 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Hôm
+        nay</span>
+    </div>
+
+    <div class="relative flex flex-col items-center group">
+      <span id="total-visitors"
+        class="absolute -top-2 -right-2 bg-brand-brown text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center shadow-sm opacity-0 sidebar-content transition-opacity duration-300">0</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-8 h-8 text-[#a95c31]">
+        <path fill="currentColor"
+          d="M224 64C206.3 64 192 78.3 192 96L192 128L160 128C124.7 128 96 156.7 96 192L96 240L544 240L544 192C544 156.7 515.3 128 480 128L448 128L448 96C448 78.3 433.7 64 416 64C398.3 64 384 78.3 384 96L384 128L256 128L256 96C256 78.3 241.7 64 224 64zM96 288L96 480C96 515.3 124.7 544 160 544L480 544C515.3 544 544 515.3 544 480L544 288L96 288z" />
+      </svg>
+      <span
+        class="absolute left-14 bg-coffee-900 text-white text-[10px] py-1 px-2 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Tổng
+        lượt xem</span>
+    </div>
+  </div>
+  <div id="social-sidebar"
+    class="fixed right-0 top-1/2 -translate-y-1/2 z-[60] flex flex-col gap-4 md:gap-6 bg-white/90 backdrop-blur-md p-2 md:p-3 rounded-l-2xl shadow-xl border border-r-0 border-brand-brown transition-all duration-500 cursor-pointer translate-x-[85%] md:translate-x-[70%]">
+    <div class="absolute left-1 top-1/2 -translate-y-1/2 flex flex-col items-center">
+      <div class="w-1 h-8 md:w-1.5 md:h-12 bg-brand-brown/30 rounded-full"></div>
+    </div>
+
+    <a href="https://www.facebook.com/profile.php?id=61572160731567" target="_blank"
+      class="relative group flex flex-col items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-6 h-6 md:w-8 md:h-8 text-[#a95c31]">
+        <path fill="currentColor"
+          d="M240 363.3L240 576L356 576L356 363.3L442.5 363.3L460.5 265.5L356 265.5L356 230.9C356 179.2 376.3 159.4 428.7 159.4C445 159.4 458.1 159.8 465.7 160.6L465.7 71.9C451.4 68 416.4 64 396.2 64C289.3 64 240 114.5 240 223.4L240 265.5L174 265.5L174 363.3L240 363.3z" />
+      </svg>
+      <span
+        class="hidden md:block absolute right-14 bg-coffee-900 text-white text-[10px] py-1 px-2 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Facebook</span>
+    </a>
+
+    <a href="https://dongdua-store-1.onrender.com/" target="_blank" class="relative group flex flex-col items-center">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-6 h-6 md:w-8 md:h-8 text-[#a95c31]">
+        <!--!Font Awesome Pro v7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2026 Fonticons, Inc.-->
+        <path fill="#a95c31"
+          d="M288 88C288 74.7 298.7 64 312 64C457.8 64 576 182.2 576 328C576 341.3 565.3 352 552 352C538.7 352 528 341.3 528 328C528 208.7 431.3 112 312 112C298.7 112 288 101.3 288 88zM144 160C170.5 160 192 181.5 192 208L192 432C192 458.5 213.5 480 240 480C266.5 480 288 458.5 288 432C288 405.5 266.5 384 240 384C231.2 384 224 376.8 224 368L224 304C224 295.2 231.2 288 240 288C319.5 288 384 352.5 384 432C384 511.5 319.5 576 240 576C160.5 576 96 511.5 96 432L96 208C96 181.5 117.5 160 144 160zM312 160C404.8 160 480 235.2 480 328C480 341.3 469.3 352 456 352C442.7 352 432 341.3 432 328C432 261.7 378.3 208 312 208C298.7 208 288 197.3 288 184C288 170.7 298.7 160 312 160z" />
+      </svg>
+      <span
+        class="hidden md:block absolute right-14 bg-coffee-900 text-white text-[10px] py-1 px-2 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity">Website</span>
+    </a>
+  </div>
+  <div id="menuOverlay"
+    class="fixed inset-0 z-[9999] bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-2 md:p-2">
+    <div
+      class="bg-[#fcfaf7] rounded shadow-2xl w-full max-w-[1100px] max-h-[95vh] relative overflow-hidden flex flex-col border-[3px] border-brand-brown transform transition-all">
+      <button id="closeMenuBtn"
+        class="absolute top-5 right-6 z-20 text-brand-brown hover:rotate-90 transition-all duration-300">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+
+      <div class="p-2 md:p-4 overflow-y-auto custom-scrollbar flex-1">
+        <img th:src="@{/images/menu.jpg}" alt="Menu" class="w-full h-auto object-contain rounded-xl" />
+      </div>
+    </div>
+  </div>
+  <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database-compat.js"></script>
+  <script th:src="@{/js/index.js(v=3)}"></script>
+</body>
+
 </html>

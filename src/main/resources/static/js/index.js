@@ -61,6 +61,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Khởi tạo Overlay Menu
   initMenuOverlay();
+
+  // Khởi tạo hiệu ứng gõ chữ
+  initTypingEffect();
 });
 
 // --- 3. Xử lý Firebase - Đếm lượt truy cập ---
@@ -229,4 +232,38 @@ function initMenuOverlay() {
       document.body.style.overflow = '';
     }
   });
+}
+
+// --- 6. Hiệu ứng gõ chữ ---
+function initTypingEffect() {
+  const el = document.getElementById('typing-text');
+  if (!el) return;
+  const text = el.getAttribute('data-text');
+  if (!text) return;
+
+  function startTyping() {
+    let i = 0;
+
+    function typeWriter() {
+      if (i <= text.length) {
+        const typed = text.substring(0, i);
+        const untyped = text.substring(i);
+
+        // Dùng opacity-0 cho phần chữ chưa gõ để giữ đúng khung kích thước ban đầu
+        const cursor = '<span class="animate-pulse border-r-2 border-coffee-100 h-full inline-block" style="margin-right: -2px;"></span>';
+
+        el.innerHTML = typed + cursor + '<span class="opacity-0">' + untyped + '</span>';
+        i++;
+        setTimeout(typeWriter, 70);
+      } else {
+        // Đợi 1.5 giây để người đọc kịp nhìn chữ cuối, sau đó lặp lại
+        setTimeout(startTyping, 6000);
+      }
+    }
+
+    typeWriter();
+  }
+
+  // Bắt đầu ngay lúc truy cập trang
+  startTyping();
 }
